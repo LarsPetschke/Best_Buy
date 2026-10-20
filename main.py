@@ -1,14 +1,23 @@
-from products import Product
+import products
+from store import Store
 
-bose = Product("Bose QuietComfort Earbuds", price=250, quantity=500)
-mac = Product("MacBook Air M2", price=1450, quantity=100)
+def main():
+    product_list = [
+        products.Product("MacBook Air M2", price=1450, quantity=100),
+        products.Product("Bose QuietComfort Earbuds", price=250, quantity=500),
+        products.Product("Google Pixel 7", price=500, quantity=250),
+    ]
 
-print(bose.buy(50))
-print(mac.buy(100))
-print(mac.is_active())
+    best_buy = Store(product_list)
 
-bose.show()
-mac.show()
+    products_active = best_buy.get_all_products()
 
-bose.set_quantity(1000)
-bose.show()
+    print(best_buy.get_total_quantity())  # 850
+
+    print(best_buy.order([
+        (products_active[0], 1),
+        (products_active[1], 2)
+    ]))
+
+if __name__ == "__main__":
+    main()
